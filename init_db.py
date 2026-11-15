@@ -4,6 +4,7 @@ import sqlite3
 conn = sqlite3.connect('students.db')
 cursor = conn.cursor()
 
+# CREATE STUDENTS TABLE
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,8 +16,10 @@ CREATE TABLE IF NOT EXISTS students (
 )
 ''')
 
+# CLEAR OLD SAMPLE RECORDS
 cursor.execute("DELETE FROM students")
 
+# SAMPLE STUDENTS
 students = [
     ('2026-00101', 'Alex Reyes', 'BSIT', 1, 'A'),
     ('2026-00102', 'Sofia Garcia', 'BSIT', 1, 'B'),
@@ -26,7 +29,8 @@ students = [
 ]
 
 cursor.executemany('''
-INSERT INTO students (student_id, name, program, year, section)
+INSERT INTO students
+(student_id, name, program, year, section)
 VALUES (?, ?, ?, ?, ?)
 ''', students)
 
